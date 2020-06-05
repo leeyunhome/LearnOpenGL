@@ -142,6 +142,7 @@
     <ClCompile Include="2Dvector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dotProduct.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

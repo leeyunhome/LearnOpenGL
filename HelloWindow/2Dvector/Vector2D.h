@@ -14,6 +14,30 @@ public:
 		: x_(_x), y_(_y)
 	{}
 
+	TT getMagnitude()
+	{
+		return sqrt(x_ * x_ + y_ * y_);
+	}
+
+	// over-loading for speedup
+	void getMagnitude(TT& mag)
+	{
+		mag = sqrt(x_ * x_ + y_ * y_);
+	}
+
+	void normalize()
+	{
+		const TT magnitude = getMagnitude();
+		x_ /= magnitude;
+		y_ /= magnitude;
+	}
+
+	Vector2D<TT> getNormalized()
+	{
+		const TT magnitude = getMagnitude();
+		return Vector2D(x_ / magnitude, y_ / magnitude);
+	}
+
 	friend std::ostream& operator << (std::ostream& out, const Vector2D<TT>& vec)
 	{
 		out << "(" << vec.x_ << ", " << vec.y_ << ")";

@@ -26,15 +26,18 @@ void processInput(GLFWwindow* window);
 
 const char* vertexShaderSource = "#version 330 core\n"
 "layout (location = 0) in vec3 aPos;\n"
+"out vec4 vertexColor;\n"
 "void main()\n"
 "{\n"
-"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+"   gl_Position = vec4(aPos, 1.0);\n"			// see how we directly give a vec3 to vec4's constructor
+"   vertexColor = vec4(0.5, 0.0, 0.0, 1.0);\n"  // set the output variable to a dark-red color
 "}\0";
 const char* fragmentShaderSource = "#version 330 core\n"
 "out vec4 FragColor;\n"
+"in vec4 vertexColor;\n"						// the input variable from the vertex shader (same name and same type)
 "void main()\n"
 "{\n"
-"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+"   FragColor = vertexColor;\n"
 "}\n\0";
 
 const int width = 800;
@@ -120,11 +123,11 @@ int main()
 
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
-	//float vertices[] = {
-	//	-0.5f, -0.5f, 0.0f, // left
-	//	 0.5f, -0.5f, 0.0f, // right
-	//	 0.0f, 0.5f, 0.0f   // top
-	//};
+	float vertices[] = {
+		-0.5f, -0.5f, 0.0f, // left
+		 0.5f, -0.5f, 0.0f, // right
+		 0.0f, 0.5f, 0.0f   // top
+	};
 
 	//float vertices[] = {
 	//	// first triangle
@@ -137,20 +140,20 @@ int main()
 	//	-0.5f,  0.5f, 0.0f	// top left
 	//};
 
-	float vertices[] = {
-		 0.5f,  0.5f, 0.0f,	// top right
-		 0.5f, -0.5f, 0.0f,	// bottom right
-		-0.5f, -0.5f, 0.0f,	// bottom left
-		-0.5f,  0.5f, 0.0f,	// top left
-	};
+	//float vertices[] = {
+	//	 0.5f,  0.5f, 0.0f,	// top right
+	//	 0.5f, -0.5f, 0.0f,	// bottom right
+	//	-0.5f, -0.5f, 0.0f,	// bottom left
+	//	-0.5f,  0.5f, 0.0f,	// top left
+	//};
 
-	unsigned int indices[] = {
-		0, 1, 3,	// first triangle
-		1, 2, 3,		// second triangle
-	};
+	//unsigned int indices[] = {
+	//	0, 1, 3,	// first triangle
+	//	1, 2, 3,		// second triangle
+	//};
 
-	unsigned int EBO;
-	glGenBuffers(1, &EBO);
+	//unsigned int EBO;
+	//glGenBuffers(1, &EBO);
 
 
 	unsigned int VBO, VAO;
@@ -162,8 +165,8 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
@@ -195,17 +198,17 @@ int main()
 		processInput(window);
 
 		// rendering commands here
-		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// .. :: Drawing code (in render loop) :: ..
 		// 4. draw the object
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
-		//glDrawArrays(GL_TRIANGLES, 0, 3);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 		// check and call events and swap the buffers
 		glfwSwapBuffers(window);
