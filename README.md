@@ -11,3 +11,6 @@ add Element Buffer Objects
 add a dark-red triangle
 ![image](https://user-images.githubusercontent.com/59910227/83825559-9e957180-a714-11ea-9fdf-68bd7d37ab8e.png)
 
+add a triangle which inner color changes every frame
+![image](https://user-images.githubusercontent.com/59910227/83827365-267d7a80-a719-11ea-94be-8ea6cacb0c9d.png)
+
