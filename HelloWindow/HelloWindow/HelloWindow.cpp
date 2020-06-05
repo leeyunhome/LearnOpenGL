@@ -34,10 +34,12 @@ const char* vertexShaderSource = "#version 330 core\n"
 "}\0";
 const char* fragmentShaderSource = "#version 330 core\n"
 "out vec4 FragColor;\n"
+"uniform vec4 ourColor;\n"						// we set this variable in the OpenGL code.
 "in vec4 vertexColor;\n"						// the input variable from the vertex shader (same name and same type)
 "void main()\n"
 "{\n"
-"   FragColor = vertexColor;\n"
+//"   FragColor = vertexColor;\n"
+"   FragColor = ourColor;\n"
 "}\n\0";
 
 const int width = 800;
@@ -204,11 +206,18 @@ int main()
 		// .. :: Drawing code (in render loop) :: ..
 		// 4. draw the object
 		glUseProgram(shaderProgram);
+
+		// update the uniform color
+		float timeValue = glfwGetTime();
+		float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+		int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
+
+		glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
-		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
-		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		////glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		//glBindVertexArray(0);
+		////glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 		// check and call events and swap the buffers
 		glfwSwapBuffers(window);
