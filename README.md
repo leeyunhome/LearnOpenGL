@@ -7,3 +7,7 @@ add HelloTriangle
 
 add Element Buffer Objects
 ![image](https://user-images.githubusercontent.com/59910227/83717885-c4683b00-a66e-11ea-9ad0-756fc8aa99ff.png)
+
+add a dark-red triangle
+![image](https://user-images.githubusercontent.com/59910227/83825559-9e957180-a714-11ea-9fdf-68bd7d37ab8e.png)
+
