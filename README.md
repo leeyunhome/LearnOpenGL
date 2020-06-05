@@ -14,3 +14,7 @@ add a dark-red triangle
 add a triangle which inner color changes every frame
 ![image](https://user-images.githubusercontent.com/59910227/83827365-267d7a80-a719-11ea-94be-8ea6cacb0c9d.png)
 
+add more attributes!
+![image](https://user-images.githubusercontent.com/59910227/83853944-fce04580-a750-11ea-8941-4aa71bc49329.png)
+
+
