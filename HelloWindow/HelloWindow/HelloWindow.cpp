@@ -62,7 +62,7 @@ int main()
 
 	// glfw window creation
 	// --------------------
-	GLFWwindow* window = glfwCreateWindow(width, height, "LearnOpenGL", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(width, height, "OpenGL¹è¿ì±â", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -81,6 +81,8 @@ int main()
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return -1;
 	}
+
+	glViewport(0, 0, width, height);
 
 	// build and compile our shader program
 	// ------------------------------------
@@ -209,7 +211,6 @@ int main()
 	//// 3. now draw the object
 	//someOpenGLFunctionThatDrawsOurTriangle();
 
-	glViewport(0, 0, width, height);
 
 	// render loop
 	while (!glfwWindowShouldClose(window))
@@ -239,7 +240,7 @@ int main()
 
 		// check and call events and swap the buffers
 		glfwSwapBuffers(window);
-		glfwPollEvents();
+		glfwPollEvents();	// checks if any events are triggered (like keyboard input or mouse movement events)
 	}
 
 	// optional: de-allocate all resources once they've outlived their purpose:
